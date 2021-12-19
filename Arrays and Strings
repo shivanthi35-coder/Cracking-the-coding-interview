@@ -1,0 +1,104 @@
+1.1) Implement an algorithm to determine if a string has all unique characters. What if you
+can not use additional data structures?
+
+
+wordList = "abcdefghijklmnopqrstuvvvyww"
+wordList="The quick brown fox jumps over the fence"
+v = lambda wordList, char : wordList.count(char) 
+mydic=dict([(char, v(wordList, char)) for char in wordList])
+print(mydic)
+
+
+1.2) Write code to reverse a C-Style String. (C-String means that “abcd” is represented as
+five characters, including the null character.)
+my_str ="abcde\0"
+rev_mystr=my_str[::-1] #+"\0"
+print(rev_mystr)
+
+1.3) Design an algorithm and write code to remove the duplicate characters in a string
+without using any additional buffer. NOTE: One or two additional variables are fine.
+An extra copy of the array is not.
+FOLLOW UP
+Write the test cases for this method.
+
+print(''.join(j for i,j in enumerate(my_str) if j not in my_str[:i]))
+
+1.4 Write a method to decide if two strings are anagrams or not
+
+if set(my_str)==set(my_str1):
+    print("true") 
+    
+1.5 Write a method to replace all spaces in a string with ‘%20’.
+print(my_str.replace(" ", "%20"))
+
+
+1.6 Given an image represented by an NxN matrix, where each pixel in the image is 4
+bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
+
+def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n= len(matrix)
+        
+        for i in range(n):
+            for j in range(i+1, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        for i in range(n):
+            l, r = 0, n - 1
+            while l < r:
+                matrix[i][l], matrix[i][r] = matrix[i][r], matrix[i][l]
+                l += 1; r -= 1
+        return matrix
+
+
+Write an algorithm such that if an element in an MxN matrix is 0, its entire row and
+column is set to 0.
+
+
+ def setZeroes(self, matrix: List[List[int]]) -> None:
+ """
+ Do not return anything, modify matrix in-place instead.
+ """
+ m = len(matrix)
+ n = len(matrix[0])
+ 
+ row = []
+ col = []
+ 
+ #finding out the index values of 0's 
+ for i in range(m):
+     for j in range(n):
+         if matrix[i][j] == 0:
+             row.append(i)
+             col.append(j)
+       
+ 
+ for k in range(len(row)):
+     #making columns zero vertically
+     for i in range(n):
+         matrix[row[k]][i] = 0
+     #making rows zero horizontally
+     for j in range(m):
+         matrix[j][col[k]] = 0
+         
+ return matrix
+ 
+ 1.8 Assume you have a method isSubstring which checks if one word is a substring of
+another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using
+only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).
+
+
+my_str1= "waterbottle"
+my_str2= "erbottlewat"
+x = lambda my_str1, char : my_str1.count(char)
+
+y = lambda my_str2, char : my_str2.count(char)
+
+mydic1=dict([(char,x(my_str1, char)) for char in my_str1])
+
+mydic2=dict([(char,y(my_str2, char)) for char in my_str2])
+
+if mydic1 == mydic2:
+    print("True")
